@@ -7,7 +7,7 @@ class Erro extends Component {
         return(
             <div>
                 <h1><em>Página não encontrada!</em></h1>
-                <Link to="/">Clique aqui e veja todos os filmes!</Link>
+                <Link to="/" className="toHome">Clique aqui e veja todos os filmes!</Link>
             </div>
         );
     }
