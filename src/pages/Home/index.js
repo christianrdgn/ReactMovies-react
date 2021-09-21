@@ -1,50 +1,38 @@
-import React, {Component} from 'react';
+import React from 'react';
+import api from '../../services/api';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './home.css'
+import './home.css';
 
-class Home extends Component {
+export default function Home(){
+    const [filmes, setFilmes] = useState([]);
 
-    constructor(props){
-        super(props);
-        this.state = {
-            filmes: []
-        };
+    useEffect(()=>{
 
-        this.loadFilmes = this.loadFilmes.bind(this);
-    }
+        async function loadFilmes(){
+            const response = await api.get('r-api/?api=filmes')
+            setFilmes(response.data);
+        }
 
-    componentDidMount(){
-        this.loadFilmes();
-    }
+        loadFilmes();
 
-    loadFilmes(){
-        let url = 'https://sujeitoprogramador.com/r-api/?api=filmes'
-        fetch(url)
-        .then((r)=>r.json())
-        .then((json)=>{ 
-            this.setState({filmes: json});
-        });
-    }
+    },[]);
 
-    render(){
-        return(
-            <div className="container">
-                
-                <div className="lista-filmes">
-                    {this.state.filmes.map((filme)=>{
-                        return(
-                            <article key={filme.id} className="filme">
-                                <strong>{filme.nome}</strong>
-                                <img src={filme.foto} alt="" />
-                                <Link to={`/filme/${filme.id}`}>Acessar</Link>
-                            </article>
-                        );
-                    })}
-                </div>
-
+    return(
+        <div className="container">
+            
+            <div className="lista-filmes">
+                {filmes.map((filme)=>{
+                    return(
+                        <article key={filme.id} className="filme">
+                            <strong>{filme.nome}</strong>
+                            <img src={filme.foto} alt={filme.nome} />
+                            <Link to={`/filme/${filme.id}`}>Acessar</Link>
+                        </article>
+                    );
+                })}
             </div>
-        );
-    }
-}
 
-export default Home;
+        </div>
+    );
+}

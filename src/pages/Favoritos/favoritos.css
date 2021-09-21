@@ -1,0 +1,40 @@
+#meus-filmes {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+ul {
+    padding: 0;
+}
+
+ul li {
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    list-style: none;
+    min-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+span {
+    font-size: 20px;
+}
+
+button {
+    margin-left: 10px;
+}
+
+ul li div a {
+    text-decoration: none;
+    color: brown;
+}
+.vazio {
+    color: #fff;
+    border-bottom: 2px solid brown;
+}
